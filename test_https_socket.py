@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # Configurare server socket
 HOST = '0.0.0.0'
-PORT = int(os.environ.get("PORT", 5000))
+PORT = 12345
 
 def start_socket_server():
     """Serverul socket care ascultă pe un port specific."""
@@ -41,5 +41,5 @@ def home():
     return "Server HTTP și socket este în funcțiune!"
 
 if __name__ == '__main__':
-    port_b = PORT  # Portul pentru Flask
-    app.run(host='0.0.0.0', port=port_b)
+    port = int(os.environ.get('PORT', 5000))  # Portul pentru Flask
+    app.run(host='0.0.0.0', port=port)
