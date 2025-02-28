@@ -1,3 +1,0 @@
-﻿Flask==2.2.3        # Framework pentru HTTP
-Jinja2==3.0.3       # Templating engine folosit de Flask
-MarkupSafe==2.0.1   # Dependență a Jinja2
