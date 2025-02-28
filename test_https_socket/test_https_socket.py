@@ -2,7 +2,7 @@
 import socket
 import threading
 import urllib.parse
-from flask import Flask
+from flask import Flask, request
 
 # Configurare aplicație Flask
 app = Flask(__name__)
@@ -38,7 +38,7 @@ def start_socket_server():
         print(f"Mesajul extras: {message}")
 
         # Răspuns către client
-        response = f"Salut! Mesajul tău a fost primit: {data}"
+        response = f"Salut! Mesajul tau a fost primit: {data}"
         client_socket.sendall(response.encode())
         
         client_socket.close()
@@ -50,6 +50,8 @@ socket_thread.start()
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
+    message = request.args.get('msg', 'Mesajul lipsește')  # Default dacă "msg" lipsește
+    print(f"Mesaj primit (GET): {message}")
     return "Server HTTP și socket este în funcțiune!"
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@
 import socket
 import threading
 import urllib.parse
-from flask import Flask
+from flask import Flask, request
 
 # Configurare aplicație Flask
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def start_socket_server():
         print(f"Conexiune acceptată de la: {client_address}")
         
         # Primirea și procesarea datelor de la client
-        data = client_socket.recv(1024).decode()
+        data = client_socket.recv(1024).decode('latin1')
         print(f"Mesaj primit: {data}")
         
         # 1. Extragem partea URL dintre "GET" și "HTTP/1.1"
@@ -50,7 +50,9 @@ socket_thread.start()
 
 # Endpoint HTTP simplu
 @app.route('/')
-def home():   
+def home():
+    message = request.args.get('msg', 'Mesajul lipsește')  # Default dacă "msg" lipsește
+    print(f"Mesaj primit (GET): {message}")
     return "Server HTTP și socket este în funcțiune!"
 
 if __name__ == '__main__':
