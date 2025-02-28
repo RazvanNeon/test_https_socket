@@ -2,7 +2,7 @@
 
 # Configurare server
 HOST = '0.0.0.0'  # Ascultă pe toate interfețele de rețea
-PORT = 12345      # Portul pe care rulează serverul
+PORT = 52345      # Portul pe care rulează serverul
 
 # Crearea unui socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
