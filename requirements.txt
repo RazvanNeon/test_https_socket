@@ -1,1 +1,1 @@
-# Nu sunt necesare module suplimentare pentru acest proiect.
+Flask==2.2.3
