@@ -54,9 +54,10 @@ def home():
     message = request.args.get('msg', 'Mesajul lipsește')  # Default dacă "msg" lipsește
     print(f"Mesaj primit (GET): {message}")
     print("Anteturi cerere:", request.headers)
+    msg_2 = request.args
     print("Parametri GET:", request.args)  # Parametri trimiși în query string
     print("Metodă HTTP:", request.method)
-    return "Server HTTP și socket este în funcțiune!"
+    return f"Server HTTP și socket este în funcțiune! + {msg_2} + msg2 = {message}"
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Portul pentru Flask
