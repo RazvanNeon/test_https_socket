@@ -41,5 +41,5 @@ def home():
     return "Server HTTP și socket este în funcțiune!"
 
 if __name__ == '__main__':
-    port = PORT  # Portul pentru Flask
-    app.run(host='0.0.0.0', port)
+    port_b = PORT  # Portul pentru Flask
+    app.run(host='0.0.0.0', port=port_b)
