@@ -51,7 +51,7 @@ socket_thread.start()
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
-    message = request.args.get('msg', 'Mesajul lipsește')  # Mesaj implicit dacă 'msg' nu există
+    message = requests.args.get('msg', 'Mesajul lipsește')  # Mesaj implicit dacă 'msg' nu există
     print(f"Mesaj primit: {message}")  # Mesajul este afișat în logurile Render
     return "Server HTTP și socket este în funcțiune!"
 
