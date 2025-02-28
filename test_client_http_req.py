@@ -3,14 +3,14 @@
 url = "https://test-https-socket.onrender.com"  # Nu este necesar să specifici portul 443
 # Mesajul care trebuie trimis către server
 # Mesajul pe care vrei să-l trimiți
-message = "Salut, server!"
+# message = "Salut, server!"
 
 # Construiți URL-ul cu parametru (query string)
 params = {'msg': message}  
 
 try:
     # Trimitem o cerere GET către server
-    response = requests.get(url, params=params)
+    response = requests.get(url)        # , params=params
 
     # Verificăm dacă cererea a fost un succes
     if response.status_code == 200:

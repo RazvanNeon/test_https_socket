@@ -11,8 +11,7 @@ app = Flask(__name__)
 HOST = '0.0.0.0'
 PORT = 12345
 
-def start_socket_server():
-        
+def start_socket_server():        
     """Serverul socket care ascultă pe un port specific."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))

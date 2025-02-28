@@ -2,7 +2,7 @@
 
 # Introduce URL-ul serverului (de exemplu, www.example.com)
 # url = input("Introduceți URL-ul (de exemplu, www.example.com): ")
-url = "https://test-https-socket.onrender.com"
+url = "localhost"
 port = 443  # Portul standard pentru HTTP
 
 try:
