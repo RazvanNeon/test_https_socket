@@ -1,22 +1,35 @@
 ﻿import socket
 
-# Configurare client
-HOST = 'localhost'  # Adresa serverului (în acest caz, local)
-PORT = 12345        # Portul serverului
+# Introduce URL-ul serverului (de exemplu, www.example.com)
+url = input("Introduceți URL-ul (de exemplu, www.example.com): ")
+port = 12345  # Portul standard pentru HTTP
 
-# Crearea unui socket
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+try:
+    # Crearea unui socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# Conectarea la server
-client_socket.connect((HOST, PORT))
+    # Rezolvarea adresei serverului și conectarea la acesta
+    print(f"Conectare la {url}:{port}...")
+    client_socket.connect((url, port))
 
-# Trimiterea unui mesaj către server
-message = "Salutare, server!"
-client_socket.sendall(message.encode())
+    # Crearea cererii HTTP
+    request = f"GET / HTTP/1.1\r\nHost: {url}\r\nConnection: close\r\n\r\n"
+    client_socket.sendall(request.encode())
 
-# Primirea răspunsului de la server
-response = client_socket.recv(1024).decode()
-print(f"Răspuns de la server: {response}")
+    # Primirea răspunsului de la server
+    response = b""
+    while True:
+        data = client_socket.recv(1024)
+        if not data:
+            break
+        response += data
 
-# Închiderea conexiunii
-client_socket.close()
+    # Afișarea răspunsului complet (header + body)
+    print("Răspuns primit de la server:\n")
+    print(response.decode())
+
+except Exception as e:
+    print(f"A apărut o eroare: {e}")
+finally:
+    # Închiderea conexiunii
+    client_socket.close()
