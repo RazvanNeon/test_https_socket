@@ -1,6 +1,7 @@
 ﻿import os
 import socket
 import threading
+import urllib.parse
 from flask import Flask
 
 # Configurare aplicație Flask
@@ -11,6 +12,7 @@ HOST = '0.0.0.0'
 PORT = 12345
 
 def start_socket_server():
+        
     """Serverul socket care ascultă pe un port specific."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
@@ -25,6 +27,17 @@ def start_socket_server():
         data = client_socket.recv(1024).decode()
         print(f"Mesaj primit: {data}")
         
+        # 1. Extragem partea URL dintre "GET" și "HTTP/1.1"
+        url = data.split(" ")[1]
+
+        # 2. Parsăm URL-ul pentru a obține parametrii query
+        parsed_url = urllib.parse.urlparse(url)
+        query_params = urllib.parse.parse_qs(parsed_url.query)
+
+        # 3. Extragem valoarea parametrului 'msg'
+        message = query_params.get("msg", [""])[0]  # Implicit, un string gol dacă 'msg' nu există
+        print(f"Mesajul extras: {message}")
+
         # Răspuns către client
         response = f"Salut! Mesajul tău a fost primit: {data}"
         client_socket.sendall(response.encode())
