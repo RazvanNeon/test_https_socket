@@ -1,6 +1,11 @@
 ﻿import requests
+import logging
 
-url = "http://localhost:5000"  # Nu este necesar să specifici portul 443 https://test-https-socket.onrender.com
+# Activează logarea detaliată
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger("urllib3").setLevel(logging.DEBUG)
+
+url = "https://test-https-socket.onrender.com"  # Nu este necesar să specifici portul 443 https://test-https-socket.onrender.com
 # Mesajul care trebuie trimis către server
 # Mesajul pe care vrei să-l trimiți
 message = "Salut, server!"

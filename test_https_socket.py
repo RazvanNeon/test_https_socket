@@ -53,6 +53,9 @@ socket_thread.start()
 def home():
     message = request.args.get('msg', 'Mesajul lipsește')  # Default dacă "msg" lipsește
     print(f"Mesaj primit (GET): {message}")
+    print("Anteturi cerere:", request.headers)
+    print("Parametri GET:", request.args)  # Parametri trimiși în query string
+    print("Metodă HTTP:", request.method)
     return "Server HTTP și socket este în funcțiune!"
 
 if __name__ == '__main__':
