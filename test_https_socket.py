@@ -52,7 +52,7 @@ socket_thread.start()
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
-    global memo_msg = '10'
+    global memo_msg
     message_a = request.args.get('msg', 'Mesajul a lipsește')  # Default dacă "msg" lipsește
     message_b = request.args.get('msgb', 'Mesajul b lipsește')  # Default dacă "msg" lipsește
     if message_a == '250':
