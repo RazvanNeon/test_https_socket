@@ -11,8 +11,9 @@ app = Flask(__name__)
 HOST = '0.0.0.0'
 PORT = 12345
 
+memo_msg = 10
+
 def start_socket_server():
-        
     """Serverul socket care ascultă pe un port specific."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
@@ -51,13 +52,17 @@ socket_thread.start()
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
-    message = request.args.get('msg', 'Mesajul lipsește')  # Default dacă "msg" lipsește
+    message_a = request.args.get('msg', 'Mesajul a lipsește')  # Default dacă "msg" lipsește
+    message_b = request.args.get('msgb', 'Mesajul b lipsește')  # Default dacă "msg" lipsește
+    if message_a == '250':
+        memo_msg = message_b
+            
     print(f"Mesaj primit (GET): {message}")
     print("Anteturi cerere:", request.headers)
     msg_2 = request.args
     print("Parametri GET:", request.args)  # Parametri trimiși în query string
     print("Metodă HTTP:", request.method)
-    return f"Server HTTP și socket este în funcțiune! + {msg_2} + msg2 = {message}"
+    return f"Server HTTP și socket este în funcțiune! msg_A={message_a}; msg_A={message_b}; memo = {memo_msg}"
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Portul pentru Flask
