@@ -25,6 +25,9 @@ def start_socket_server():
     
     while True:
         client_socket, client_address = server_socket.accept()
+
+        client_key = str(client_address)
+        
         active_clients.append(client_address)
         print(f"Conexiune acceptată de la: {client_address}")
         
