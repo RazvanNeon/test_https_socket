@@ -11,7 +11,7 @@ app = Flask(__name__)
 HOST = '0.0.0.0'
 PORT = 12345
 
-memo_msg = 10
+memo_msg = '10'
 
 def start_socket_server():
     """Serverul socket care ascultă pe un port specific."""
