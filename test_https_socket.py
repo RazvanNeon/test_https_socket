@@ -76,6 +76,30 @@ def status():
         'active_clients': active_clients,
         'memo_msg': memo_msg
     })
+
+@app.route('/poll_status', methods=['GET'])
+def poll_status():
+    """
+    Endpoint pentru long polling.
+    Se păstrează conexiunea deschisă până când:
+      - se detectează cel puțin un client conectat,
+      - sau expiră un timeout (de exemplu, 30 secunde).
+    """
+    timeout = 30  # secunde
+    interval = 1  # intervalul de verificare (1 secunda)
+    waited = 0
+    
+    while waited < timeout:
+        if active_clients:  # Dacă există cel puțin un client conectat
+            break
+        time.sleep(interval)
+        waited += interval
+
+    return jsonify({
+        'active_clients': active_clients,
+        'memo_msg': memo_msg,
+        'waited': waited  # cât a așteptat până când a răspuns
+    })
     
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Portul pentru Flask
