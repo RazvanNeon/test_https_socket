@@ -102,6 +102,8 @@ def poll_status():
     interval = 1  # intervalul de verificare (1 secunda)
     waited = 0
 
+    message_a = request.args.get('msg', 'Mesajul a lipsește')  # Default dacă "msg" lipsește
+    message_b = request.args.get('msgb', 'Mesajul b lipsește')  # Default dacă "msg" lipsește
     if message_a == '250':
         memo_msg = message_b
         
