@@ -11,7 +11,7 @@ app = Flask(__name__)
 HOST = '0.0.0.0'
 PORT = 12345
 
-memo_msg = '10'
+
 
 def start_socket_server():
     """Serverul socket care ascultă pe un port specific."""
@@ -52,6 +52,7 @@ socket_thread.start()
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
+    global memo_msg = '10'
     message_a = request.args.get('msg', 'Mesajul a lipsește')  # Default dacă "msg" lipsește
     message_b = request.args.get('msgb', 'Mesajul b lipsește')  # Default dacă "msg" lipsește
     if message_a == '250':
