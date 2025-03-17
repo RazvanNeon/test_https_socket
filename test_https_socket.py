@@ -47,7 +47,7 @@ def start_socket_server():
         client_socket.sendall(response.encode())
         
         client_socket.close()
-        active_clients.remove(client_address)
+        #active_clients.remove(client_address)
 
 # Pornirea serverului socket într-un fir de execuție separat
 socket_thread = threading.Thread(target=start_socket_server, daemon=True)
