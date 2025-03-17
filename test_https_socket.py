@@ -39,6 +39,17 @@ def start_socket_server():
         parsed_url = urllib.parse.urlparse(url)
         query_params = urllib.parse.parse_qs(parsed_url.query)
 
+        # Extragem valoarea parametrului 'msg'
+        message = query_params.get("msg", [""])[0]
+        print(f"Mesajul extras: {message}")
+
+        # Stocăm memo_msg-ul primit pentru acest client
+        # De exemplu, stocăm și timpul ultimei activități
+        active_clients[client_key] = {
+            "memo_msg": message,
+            "last_activity": time.time()
+        }
+        
         # 3. Extragem valoarea parametrului 'msg'
         message = query_params.get("msg", [""])[0]  # Implicit, un string gol dacă 'msg' nu există
         print(f"Mesajul extras: {message}")
