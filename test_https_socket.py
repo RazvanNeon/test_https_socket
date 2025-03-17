@@ -57,7 +57,7 @@ def home():
     if message_a == '250':
         memo_msg = message_b
             
-    print(f"Mesaj primit (GET): {message}")
+    print(f"Mesaj primit (GET): {message_a}")
     print("Anteturi cerere:", request.headers)
     msg_2 = request.args
     print("Parametri GET:", request.args)  # Parametri trimiși în query string
