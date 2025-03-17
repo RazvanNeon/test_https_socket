@@ -83,12 +83,10 @@ def home():
 
 @app.route('/status', methods=['GET'])
 def status():
-    # Endpoint suplimentar pentru a obține starea conexiunii
     client_ip = request.headers.get("X-Forwarded-For", request.remote_addr)
     return jsonify({
         'client_ip': client_ip,
-        'active_clients': active_clients,
-        'memo_msg': memo_msg
+        'active_clients': active_clients
     })
 
 @app.route('/poll_status', methods=['GET'])
