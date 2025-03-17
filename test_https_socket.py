@@ -12,8 +12,10 @@ HOST = '0.0.0.0'
 PORT = 12345
 
 memo_msg = '10'
+active_clients = []
 
 def start_socket_server():
+    global active_clients
     """Serverul socket care ascultă pe un port specific."""
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
@@ -22,6 +24,7 @@ def start_socket_server():
     
     while True:
         client_socket, client_address = server_socket.accept()
+        active_clients.append(client_address)
         print(f"Conexiune acceptată de la: {client_address}")
         
         # Primirea și procesarea datelor de la client
@@ -44,6 +47,7 @@ def start_socket_server():
         client_socket.sendall(response.encode())
         
         client_socket.close()
+        active_clients.remove(client_address)
 
 # Pornirea serverului socket într-un fir de execuție separat
 socket_thread = threading.Thread(target=start_socket_server, daemon=True)
@@ -65,6 +69,14 @@ def home():
     print("Metodă HTTP:", request.method)
     return f"Server HTTP și socket este în funcțiune! msg_A={message_a}; msg_A={message_b}; memo = {memo_msg}"
 
+@app.route('/status', methods=['GET'])
+def status():
+    # Endpoint suplimentar pentru a obține starea conexiunii
+    return jsonify({
+        'active_clients': active_clients,
+        'memo_msg': memo_msg
+    })
+    
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Portul pentru Flask
     app.run(host='0.0.0.0', port=port)
