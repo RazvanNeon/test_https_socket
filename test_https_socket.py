@@ -91,6 +91,7 @@ def status():
 
 @app.route('/poll_status', methods=['GET'])
 def poll_status():
+    global memo_msg
     """
     Endpoint pentru long polling.
     Se păstrează conexiunea deschisă până când:
@@ -100,7 +101,10 @@ def poll_status():
     timeout = 30  # secunde
     interval = 1  # intervalul de verificare (1 secunda)
     waited = 0
-    
+
+    if message_a == '250':
+        memo_msg = message_b
+        
     while waited < timeout:
         if active_clients:  # Dacă există cel puțin un client conectat
             break
