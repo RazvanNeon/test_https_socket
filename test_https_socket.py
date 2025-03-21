@@ -68,6 +68,16 @@ def start_socket_server():
 socket_thread = threading.Thread(target=start_socket_server, daemon=True)
 socket_thread.start()
 
+@app.route('/post', methods=['POST'])
+def handle_post():
+    # Extrage corpul mesajului POST
+    data = request.json  # Dacă datele sunt trimise ca JSON
+    # Sau:
+    # data = request.form  # Dacă datele sunt trimise ca form-data
+
+    # Prelucrează datele extrase
+    return f"Informația recepționată: {data}", 200
+    
 # Endpoint HTTP simplu
 @app.route('/')
 def home():
