@@ -71,10 +71,10 @@ socket_thread.start()
 @app.route('/post', methods=['POST'])
 def handle_post():
     # Extrage corpul mesajului POST
-    data = request.json  # Dacă datele sunt trimise ca JSON
+    # data = request.json  # Dacă datele sunt trimise ca JSON
     # Sau:
     # data = request.form  # Dacă datele sunt trimise ca form-data
-
+    data = request.get_data(as_text=True)
     # Prelucrează datele extrase
     return f"Informația recepționată: {data}", 200
     
